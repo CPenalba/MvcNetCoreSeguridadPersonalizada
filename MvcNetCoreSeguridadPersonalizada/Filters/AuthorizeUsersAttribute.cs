@@ -25,7 +25,6 @@ namespace MvcNetCoreSeguridadPersonalizada.Filters
                 //DIRECCIONAMOS EL FILTRO HACIA LA RUTA DE LOGIN
                 context.Result = new RedirectToRouteResult(rutaLogin);
             }
-            throw new NotImplementedException();
         }
     }
 }

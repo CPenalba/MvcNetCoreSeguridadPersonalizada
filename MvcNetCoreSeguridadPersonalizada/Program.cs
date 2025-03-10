@@ -12,6 +12,8 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddCookie();
 
+builder.Services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -25,18 +27,26 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
+app.UseStaticFiles();
+//app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapStaticAssets();
+//app.MapStaticAssets();
 
 app.UseSession();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+//SI TENEMOS SEGURIDAD PERSONALIZADA SE UTILIZA USEMVC EN LUGAR DE MAPCONTROLLERROUTE
+app.UseMvc(routes =>
+{
+    routes.MapRoute(
+        name: "default",
+    template: "{controller=Home}/{action=Index}/{id?}");
+});
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}")
+//    .WithStaticAssets();
 
 
 app.Run();

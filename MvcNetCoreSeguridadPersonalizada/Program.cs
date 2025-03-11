@@ -14,8 +14,6 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
 
-builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,7 +39,7 @@ app.UseMvc(routes =>
 {
     routes.MapRoute(
         name: "default",
-    template: "{controller=Home}/{action=Index}/{id?}");
+        template: "{controller=Home}/{action=Index}/{id?}");
 });
 //app.MapControllerRoute(
 //    name: "default",
